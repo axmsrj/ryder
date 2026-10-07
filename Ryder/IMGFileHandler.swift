@@ -44,7 +44,7 @@ final class IMGFileHandler: ObservableObject {
         let version2Signature = Data([0x56, 0x45, 0x52, 0x32])
             
         if data == version2Signature {
-            let archive = try openAsV2(file)
+            let archive = try openAsV2(file, url: url)
             return .version2(archive)
         }
         
@@ -57,7 +57,7 @@ final class IMGFileHandler: ObservableObject {
         return .needsDIR
     }
     
-    func openAsV2(_ file: FileHandle) throws -> IMGArchive {
+    func openAsV2(_ file: FileHandle, url: URL) throws -> IMGArchive {
         try file.seek(toOffset: 4)
         
         guard let countData = try file.read(upToCount: 4), countData.count == 4 else {
@@ -129,6 +129,40 @@ final class IMGFileHandler: ObservableObject {
             entries.append(entry)
         }
         
-        return IMGArchive(entries: entries)
+        return IMGArchive(url: url, entries: entries)
+    }
+
+    func data(for entry: IMGEntry, in archive: IMGArchive) throws -> Data {
+        let hasAccess = archive.url.startAccessingSecurityScopedResource()
+
+        defer {
+            if hasAccess {
+                archive.url.stopAccessingSecurityScopedResource()
+            }
+        }
+
+        let file = try FileHandle(forReadingFrom: archive.url)
+
+        defer {
+            try? file.close()
+        }
+
+        let sectorSize: UInt64 = 2_048
+        let offset = UInt64(entry.sectorOffset) * sectorSize
+        let byteCount = UInt64(entry.sectorCount) * sectorSize
+        let fileSize = try file.seekToEnd()
+
+        guard offset <= fileSize, byteCount <= fileSize - offset else {
+            throw IMGOpenError.entryOutsideArchive
+        }
+
+        try file.seek(toOffset: offset)
+
+        guard let data = try file.read(upToCount: Int(byteCount)),
+              data.count == Int(byteCount) else {
+            throw IMGOpenError.incompleteEntryData
+        }
+
+        return data
     }
 }

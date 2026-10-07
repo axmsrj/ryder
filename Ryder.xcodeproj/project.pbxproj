@@ -9,12 +9,14 @@
 /* Begin PBXBuildFile section */
 		254ADBF0307339D100D6F003 /* TODO.md in Resources */ = {isa = PBXBuildFile; fileRef = 254ADBEF307339D100D6F003 /* TODO.md */; };
 		254ADBF230733A3D00D6F003 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 254ADBF130733A3D00D6F003 /* README.md */; };
+		254ADC1C3076AA3500D6F003 /* Screenshot.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 254ADC1B3076AA3500D6F003 /* Screenshot.jpeg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		000000000000000000000120 /* Ryder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ryder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		254ADBEF307339D100D6F003 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		254ADBF130733A3D00D6F003 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		254ADC1B3076AA3500D6F003 /* Screenshot.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Screenshot.jpeg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -40,6 +42,7 @@
 				254ADBF130733A3D00D6F003 /* README.md */,
 				254ADBEF307339D100D6F003 /* TODO.md */,
 				000000000000000000000010 /* Ryder */,
+				254ADC1B3076AA3500D6F003 /* Screenshot.jpeg */,
 				000000000000000000000020 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,6 +115,7 @@
 			isa = PBXResourcesBuildPhase;
 			files = (
 				254ADBF230733A3D00D6F003 /* README.md in Resources */,
+				254ADC1C3076AA3500D6F003 /* Screenshot.jpeg in Resources */,
 				254ADBF0307339D100D6F003 /* TODO.md in Resources */,
 			);
 		};
@@ -268,6 +272,10 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor/librw",
+				);
 				INFOPLIST_KEY_CFBundleDisplayName = Ryder;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -285,15 +293,22 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor/build/librw-null/src/librw.a",
+					"-framework",
+					SceneKit,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.axmsrj.Ryder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
-				SDKROOT = auto;
+				SDKROOT = macosx;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = macosx;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Ryder/Ryder-Bridging-Header.h";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
@@ -311,6 +326,10 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor/librw",
+				);
 				INFOPLIST_KEY_CFBundleDisplayName = Ryder;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -328,15 +347,22 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor/build/librw-null/src/librw.a",
+					"-framework",
+					SceneKit,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.axmsrj.Ryder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
-				SDKROOT = auto;
+				SDKROOT = macosx;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = macosx;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Ryder/Ryder-Bridging-Header.h";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";

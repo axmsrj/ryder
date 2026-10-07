@@ -7,6 +7,7 @@ import SwiftUI
         WindowGroup {
             ContentView()
         }
+        .defaultSize(width: 1_200, height: 720)
         .commands {
             CommandGroup(replacing: .newItem) {
                 Button("Open .img file...") {
